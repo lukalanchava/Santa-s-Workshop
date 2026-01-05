@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wishlist - Santa's Workshop</title>
+    <link rel="icon" type="image/png" href="/icons/icon.png" class="icon">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Mountains+of+Christmas:wght@700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="wishlist.css">
+</head>
+<body>
+    <ul class="lightrope">
+        <li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li>
+        <li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li>
+        <li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li>
+    </ul>
+
+    <header>
+        <div class="logo">
+            <img src="/picture/image.jpg" alt="Santa" class="logo-icon">
+            <h1>Santa's Workshop</h1>
+        </div>
+        <div class="user-profile">
+            <span>Head Elf: Luka Lanchava</span>
+            <img src="/picture/luka.png" alt="Luka" class="avatar" style="object-fit: cover;">
+        </div>
+    </header>
+
+    <nav class="main-nav">
+        <ul>
+            <li><a href="index.html">Dashboard</a></li>
+            <li><a href="wishlist.html">Wishlist</a></li>
+            <li><a href="gifts.html">Gifts</a></li>
+            <li><a href="logistics.html">Logistics</a></li>
+            <li><a href="analytics.html">Analytics</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <div style="background: rgba(0,0,0,0.3); color: #fff; padding: 10px; border-radius: 8px; margin-bottom: 1rem; display: flex; align-items: center; gap: 10px;"><span style="background: var(--christmas-red); padding: 2px 8px; border-radius: 4px; font-size: 0.8rem; font-weight: bold;">NEWS</span><marquee id="newsTicker" scrollamount="5">Loading updates...</marquee></div>
+        <h2>Incoming Wishlists <i class="fa-solid fa-scroll"></i></h2>
+        <div class="stats-panel">
+            <div class="stat-box">
+                <div class="stat-number">1,245</div>
+                <div>Pending Reviews</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number">85%</div>
+                <div>Nice List Ratio</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number">24h</div>
+                <div>Avg. Response Time</div>
+            </div>
+        </div>
+        <div style="margin-bottom: 1.5rem;">
+            <input type="text" id="listSearch" placeholder="Search by name..." style="width: 100%; padding: 15px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.3); background: rgba(255,255,255,0.8); font-family: inherit;" onkeyup="filterList()">
+        </div>
+        <table class="wishlist-table" id="wishlistTable">
+            <thead>
+                <tr>
+                    <th onclick="sortTable(0)" style="cursor:pointer;">Name <i class="fa-solid fa-sort"></i></th>
+                    <th>Location</th>
+                    <th>Top Wish</th>
+                    <th onclick="sortTable(3)" style="cursor:pointer;">Status <i class="fa-solid fa-sort"></i></th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Luka Lanchava</td>
+                    <td>Kutaisi, Georgia</td>
+                    <td>New PC for Gaming</td>
+                    <td><span class="badge badge-nice">Nice</span></td>
+                    <td>
+                        <button class="action-btn" onclick="handleWish(this)">Approve</button>
+                        <button class="action-btn btn-decline" onclick="handleWish(this)">Decline</button>
+                        <button class="action-btn" onclick="window.location.href='review.html?id=1001'" style="margin-left: 5px;">Review</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Irakli Geradze</td>
+                    <td>Samtredia, Georgia</td>
+                    <td>AI Robot</td>
+                    <td><span class="badge badge-naughty">Naughty</span></td>
+                    <td><button class="action-btn" onclick="window.location.href='review.html?id=1024'">Review</button></td>
+                </tr>
+                <tr>
+                    <td>Zurab Shengelia</td>
+                    <td>Samtredia, Georgia</td>
+                    <td>Game Console</td>
+                    <td><span class="badge badge-nice">Nice</span></td>
+                    <td>
+                        <button class="action-btn" onclick="handleWish(this)">Approve</button>
+                        <button class="action-btn btn-decline" onclick="handleWish(this)">Decline</button>
+                        <button class="action-btn" onclick="window.location.href='review.html?id=1003'" style="margin-left: 5px;">Review</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Giorgi Kopaleishvili</td>
+                    <td>Samtredia, Georgia</td>
+                    <td>ak-47</td>
+                    <td><span class="badge badge-nice">Nice</span></td>
+                    <td>
+                        <button class="action-btn" onclick="handleWish(this)">Approve</button>
+                        <button class="action-btn btn-decline" onclick="handleWish(this)">Decline</button>
+                        <button class="action-btn" onclick="window.location.href='review.html?id=1004'" style="margin-left: 5px;">Review</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Vato Tabatadze</td>
+                    <td>..., Georgia</td>
+                    <td>Laptop</td>
+                    <td><span class="badge badge-nice">Nice</span></td>
+                        <td><button class="action-btn" onclick="handleWish(this)">Approve</button>
+                        <button class="action-btn btn-decline" onclick="handleWish(this)">Decline</button>
+                        <button class="action-btn" onclick="window.location.href='review.html?id=1026'">Review</button></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div style="margin-top: 2rem; text-align: center;">
+            <a href="#" onclick="alert('Accessing restricted archives...')" style="text-decoration: none; color: #333; display: inline-block; padding: 10px; background: rgba(255,255,255,0.1); border-radius: 8px;">
+                <img src="https://placehold.co/50x50/333/FFF?text=Arc" style="vertical-align: middle; border-radius: 5px;">
+                <span style="margin-left: 10px; font-weight: bold; color: var(--snow-white);">Access 1990-2023 Archives</span>
+            </a>
+        </div>
+
+    </main>
+
+    <footer>
+        <p>&copy; <span id="year"></span> Santa's Workshop Inc. | North Pole</p>
+        <p>Made with <i class="fa-solid fa-heart" style="color: var(--christmas-red);"></i> by Luka Lanchava Goa departament</p>
+        <button id="snow-toggle" style="background: none; border: 1px solid #555; color: #888; padding: 5px 10px; border-radius: 15px; cursor: pointer; margin-top: 10px; font-size: 0.8rem;">Toggle Snow</button>
+    </footer>
+
+    <!-- Custom Modal Structure -->
+    <div class="modal-overlay" id="valueModal">
+        <div class="modal">
+            <span class="modal-icon" id="modalIcon"></span>
+            <h3 id="modalTitle"></h3>
+            <p id="modalText"></p>
+            <button class="modal-btn" onclick="closeModal()">Close</button>
+        </div>
+    </div>
+
+    <audio id="bg-music" loop src="/audio/jingle-bells-445113.mp3"></audio>
+    <audio id="hover-sound" src="/audio/sleigh-bells.mp3"></audio>
+
+    <script>
+        document.getElementById('year').innerText = new Date().getFullYear();
+
+        function handleWish(btn) {
+            const row = btn.closest('tr');
+            row.style.transition = 'opacity 0.5s, transform 0.5s';
+            row.style.opacity = '0';
+            row.style.transform = 'translateX(20px)';
+            setTimeout(() => row.remove(), 500);
+        }
+
+        // Music Toggle
+        const musicBtn = document.getElementById('music-toggle'); 
+        const bgMusic = document.getElementById('bg-music'); 
+        const hoverSound = document.getElementById('hover-sound');
+
+        if (sessionStorage.getItem('musicPlaying') === 'true') {
+            bgMusic.currentTime = parseFloat(sessionStorage.getItem('musicTime') || 0);
+            bgMusic.play().catch(e => console.log("Autoplay blocked:", e));
+        }
+
+        // Music toggle removed from this page
+
+        window.addEventListener('beforeunload', () => {
+            sessionStorage.setItem('musicTime', bgMusic.currentTime);
+        });
+
+        // Table Sorting Functionality
+        function sortTable(n) {
+            var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+            table = document.getElementById("wishlistTable");
+            switching = true;
+            dir = "asc";
+            while (switching) {
+                switching = false;
+                rows = table.rows;
+                for (i = 1; i < (rows.length - 1); i++) {
+                    shouldSwitch = false;
+                    x = rows[i].getElementsByTagName("TD")[n];
+                    y = rows[i + 1].getElementsByTagName("TD")[n];
+                    if (dir == "asc") {
+                        if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) { shouldSwitch = true; break; }
+                    } else if (dir == "desc") {
+                        if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) { shouldSwitch = true; break; }
+                    }
+                }
+                if (shouldSwitch) {
+                    rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+                    switching = true;
+                    switchcount++;
+                } else {
+                    if (switchcount == 0 && dir == "asc") { dir = "desc"; switching = true; }
+                }
+            }
+        }
+
+        // Filter List Functionality
+        function filterList() {
+            const input = document.getElementById('listSearch');
+            const filter = input.value.toUpperCase();
+            const table = document.getElementById("wishlistTable");
+            const tr = table.getElementsByTagName("tr");
+
+            for (let i = 1; i < tr.length; i++) {
+                const td = tr[i].getElementsByTagName("td")[0];
+                if (td) {
+                    const txtValue = td.textContent || td.innerText;
+                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                        tr[i].style.display = "";
+                    } else {
+                        tr[i].style.display = "none";
+                    }
+                }
+            }
+        }
+
+        // Hover Effects
+        document.querySelectorAll('button, a, tr').forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                hoverSound.currentTime = 0;
+                hoverSound.play().catch(() => {});
+            });
+        });
+
+        // Row Highlight
+        document.querySelectorAll('tbody tr').forEach(row => {
+            row.addEventListener('click', function() {
+                document.querySelectorAll('tbody tr').forEach(r => r.style.background = "");
+                this.style.background = "rgba(255, 202, 40, 0.3)"; // Gold highlight
+            });
+        });
+
+        // Realistic Snow
+        let snowInterval;
+        let snowEnabled = true;
+
+        function createSnow() {
+            if (!snowEnabled) return;
+            const snowflake = document.createElement('div');
+            snowflake.classList.add('snowflake');
+            snowflake.innerHTML = '❄';
+            snowflake.style.left = Math.random() * 100 + 'vw';
+            snowflake.style.fontSize = Math.random() * 15 + 10 + 'px';
+            snowflake.style.animationDuration = Math.random() * 5 + 3 + 's';
+            snowflake.style.opacity = Math.random();
+            document.body.appendChild(snowflake);
+            setTimeout(() => snowflake.remove(), 8000);
+        }
+        snowInterval = setInterval(createSnow, 200);
+
+        document.getElementById('snow-toggle').addEventListener('click', function() {
+            snowEnabled = !snowEnabled;
+            this.innerText = snowEnabled ? "Disable Snow" : "Enable Snow";
+            if(!snowEnabled) {
+                document.querySelectorAll('.snowflake').forEach(el => el.remove());
+            }
+        });
+
+        // Custom Modal Override
+        window.alert = function(msg) {
+            document.getElementById('modalTitle').innerText = "Notification";
+            document.getElementById('modalText').innerText = msg;
+            document.getElementById('modalIcon').innerHTML = '<i class="fa-solid fa-bell" style="color: var(--gold);"></i>';
+            document.getElementById('valueModal').classList.add('active');
+        }
+        function closeModal() {
+            document.getElementById('valueModal').classList.remove('active');
+        }
+        const newsItems = ["Breaking: Elf Union reaches agreement on cookie breaks...", "Weather Alert: Heavy snow expected in sector 7...", "Toy Production: Wooden trains ahead of schedule...", "Mrs. Claus announces new hot cocoa recipe...", "Reindeer Games: Dasher takes gold in sprint..."]; setInterval(() => { const ticker = document.getElementById('newsTicker'); if(ticker) ticker.innerText = newsItems.join("  ***  "); }, 10000); setTimeout(() => { const ticker = document.getElementById('newsTicker'); if(ticker) ticker.innerText = newsItems.join("  ***  "); }, 100);
+    
+        function toggleElfZoom() {
+            let overlay = document.getElementById('elfZoomOverlay');
+            if (!overlay) {
+                overlay = document.createElement('div');
+                overlay.id = 'elfZoomOverlay';
+                overlay.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.85);z-index:999999;display:flex;justify-content:center;align-items:center;cursor:zoom-out;opacity:0;transition:opacity 0.3s ease;backdrop-filter:blur(5px);';
+                overlay.innerHTML = '<img src="/picture/luka.png" style="max-width:80vh;max-height:80vh;border-radius:50%;box-shadow:0 0 50px rgba(255,215,0,0.3);transform:scale(0.5);transition:transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);border: 4px solid var(--gold);">';
+                document.body.appendChild(overlay);
+                overlay.onclick = () => {
+                    overlay.style.opacity = '0';
+                    overlay.querySelector('img').style.transform = 'scale(0.5)';
+                    setTimeout(() => overlay.remove(), 300);
+                };
+                requestAnimationFrame(() => { overlay.style.opacity = '1'; overlay.querySelector('img').style.transform = 'scale(1)'; });
+            }
+        }
+    </script>
+</body>
+</html>

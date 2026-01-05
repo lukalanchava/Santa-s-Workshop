@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact - Santa's Workshop</title>
+    <link rel="icon" type="image/png" href="/icons/icon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Mountains+of+Christmas:wght@700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="contact.css">
+</head>
+<body>
+    <ul class="lightrope">
+        <li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li>
+        <li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li>
+        <li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li>
+    </ul>
+
+    <header>
+        <div class="logo">
+            <img src="/picture/image.jpg" alt="Santa" class="logo-icon">
+            <h1>Santa's Workshop</h1>
+        </div>
+        <div class="user-profile">
+            <span>Head Elf: Luka Lanchava</span>
+            <img src="/picture/luka.png" alt="Luka" class="avatar" style="object-fit: cover;">
+        </div>
+    </header>
+
+    <nav class="main-nav">
+        <ul>
+            <li><a href="index.html">Dashboard</a></li>
+            <li><a href="wishlist.html">Wishlist</a></li>
+            <li><a href="gifts.html">Gifts</a></li>
+            <li><a href="logistics.html">Logistics</a></li>
+            <li><a href="analytics.html">Analytics</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <div style="background: rgba(0,0,0,0.3); color: #fff; padding: 10px; border-radius: 8px; margin-bottom: 1rem; display: flex; align-items: center; gap: 10px;"><span style="background: var(--christmas-red); padding: 2px 8px; border-radius: 4px; font-size: 0.8rem; font-weight: bold;">NEWS</span><marquee id="newsTicker" scrollamount="5">Loading updates...</marquee></div>
+        <h2>Contact the North Pole <i class="fa-solid fa-envelope-open-text"></i></h2>
+        
+        <div style="text-align:center; margin-bottom:1rem;">
+            <a href="#" onclick="alert('Tracking mail...')">
+                <img src="https://placehold.co/150x150/1b5e20/FFF?text=North+Pole+Post" alt="Stamp" style="border-radius:50%; border: 4px dashed var(--gold); transform: rotate(-10deg); box-shadow: 0 4px 10px rgba(0,0,0,0.2);">
+            </a>
+        </div>
+
+        <div class="notice"><i class="fa-solid fa-circle-info"></i> <strong>Holiday Notice:</strong> Due to high volume, response times may be delayed until after Dec 25th.</div>
+        <div class="contact-form">
+            <form id="contactForm" onsubmit="handleSubmit(event)">
+                <div class="form-group">
+                    <label for="name">Elf Name / Parent Name</label>
+                    <input type="text" id="name" placeholder="e.g. Buddy the Elf">
+                </div>
+                <div class="form-group">
+                    <label for="department">Department</label>
+                    <select id="department">
+                        <option>Toy Production</option>
+                        <option>Reindeer Stable</option>
+                        <option>Naughty/Nice List Appeals</option>
+                        <option>Sleigh Maintenance</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="urgency">Urgency Level</label>
+                    <select id="urgency">
+                        <option>Low (Can wait until Jan)</option>
+                        <option>Medium (Before Christmas)</option>
+                        <option style="color: red; font-weight: bold;">High (Christmas Emergency)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea id="message" rows="5" placeholder="Type your message here..." oninput="updateCharCount(this)" maxlength="500"></textarea>
+                    <div style="text-align: right; font-size: 0.8rem; color: #666; margin-top: 5px;" id="charCount">0 / 500</div>
+                </div>
+                <button type="submit">Send via Polar Express</button>
+            </form>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; <span id="year"></span> Santa's Workshop Inc. | North Pole</p>
+        <p>Made with <i class="fa-solid fa-heart" style="color: var(--christmas-red);"></i> by Luka Lanchava Goa departament</p>
+        <button id="snow-toggle" style="background: none; border: 1px solid #555; color: #888; padding: 5px 10px; border-radius: 15px; cursor: pointer; margin-top: 10px; font-size: 0.8rem;">Toggle Snow</button>
+    </footer>
+
+    <!-- Custom Modal Structure -->
+    <div class="modal-overlay" id="valueModal">
+        <div class="modal">
+            <span class="modal-icon" id="modalIcon"></span>
+            <h3 id="modalTitle"></h3>
+            <p id="modalText"></p>
+            <button class="modal-btn" onclick="closeModal()">Close</button>
+        </div>
+    </div>
+
+    <audio id="bg-music" loop src="/audio/jingle-bells-445113.mp3"></audio>
+
+    <script>
+        document.getElementById('year').innerText = new Date().getFullYear();
+
+        function handleSubmit(e) {
+            e.preventDefault();
+            
+            // Validation Shake
+            const nameInput = document.getElementById('name');
+            if(!nameInput.value) {
+                nameInput.style.borderColor = 'red';
+                nameInput.parentElement.style.animation = "shake 0.5s";
+                setTimeout(() => nameInput.parentElement.style.animation = "", 500);
+                return;
+            }
+
+            const btn = e.target.querySelector('button');
+            const originalText = btn.innerText;
+            btn.innerHTML = '<i class="fa-solid fa-sleigh"></i> Sending...';
+            setTimeout(() => {
+                btn.innerHTML = '<i class="fa-solid fa-check"></i> Sent to North Pole!';
+                btn.style.background = 'var(--christmas-green)';
+                e.target.reset();
+                setTimeout(() => {
+                    btn.innerText = originalText;
+                    btn.style.background = '';
+                }, 3000);
+            }, 1500);
+        }
+
+        function updateCharCount(textarea) {
+            const count = textarea.value.length;
+            document.getElementById('charCount').innerText = `${count} / 500`;
+        }
+
+        // Realistic Snow
+        let snowInterval;
+        let snowEnabled = true;
+
+        function createSnow() {
+            if (!snowEnabled) return;
+            const snowflake = document.createElement('div');
+            snowflake.classList.add('snowflake');
+            snowflake.innerHTML = '❄';
+            snowflake.style.left = Math.random() * 100 + 'vw';
+            snowflake.style.fontSize = Math.random() * 15 + 10 + 'px';
+            snowflake.style.animationDuration = Math.random() * 5 + 3 + 's';
+            snowflake.style.opacity = Math.random();
+            document.body.appendChild(snowflake);
+            setTimeout(() => snowflake.remove(), 8000);
+        }
+        snowInterval = setInterval(createSnow, 200);
+
+        document.getElementById('snow-toggle').addEventListener('click', function() {
+            snowEnabled = !snowEnabled;
+            this.innerText = snowEnabled ? "Disable Snow" : "Enable Snow";
+            if(!snowEnabled) {
+                document.querySelectorAll('.snowflake').forEach(el => el.remove());
+            }
+        });
+
+        // Custom Modal Override
+        window.alert = function(msg) {
+            document.getElementById('modalTitle').innerText = "Notification";
+            document.getElementById('modalText').innerText = msg;
+            document.getElementById('modalIcon').innerHTML = '<i class="fa-solid fa-bell" style="color: var(--gold);"></i>';
+            document.getElementById('valueModal').classList.add('active');
+        }
+        function closeModal() {
+            document.getElementById('valueModal').classList.remove('active');
+        }
+        
+        const musicBtn = document.getElementById('music-toggle'); 
+        const bgMusic = document.getElementById('bg-music'); 
+        
+        if (sessionStorage.getItem('musicPlaying') === 'true') {
+            bgMusic.currentTime = parseFloat(sessionStorage.getItem('musicTime') || 0);
+            bgMusic.play().catch(e => console.log("Autoplay blocked:", e));
+        }
+
+        // Music toggle removed from this page
+
+        window.addEventListener('beforeunload', () => {
+            sessionStorage.setItem('musicTime', bgMusic.currentTime);
+        });
+
+        const newsItems = ["Breaking: Elf Union reaches agreement on cookie breaks...", "Weather Alert: Heavy snow expected in sector 7...", "Toy Production: Wooden trains ahead of schedule...", "Mrs. Claus announces new hot cocoa recipe...", "Reindeer Games: Dasher takes gold in sprint..."]; setInterval(() => { const ticker = document.getElementById('newsTicker'); if(ticker) ticker.innerText = newsItems.join("  ***  "); }, 10000); setTimeout(() => { const ticker = document.getElementById('newsTicker'); if(ticker) ticker.innerText = newsItems.join("  ***  "); }, 100);
+    
+        // Global Image Zoom
+        document.addEventListener('click', function(e) {
+            if (e.target.tagName === 'IMG') {
+                e.preventDefault();
+                e.stopPropagation();
+                const src = e.target.src;
+                let overlay = document.getElementById('globalZoomOverlay');
+                if (!overlay) {
+                    overlay = document.createElement('div');
+                    overlay.id = 'globalZoomOverlay';
+                    overlay.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.9);z-index:9999999;display:flex;justify-content:center;align-items:center;cursor:zoom-out;opacity:0;transition:opacity 0.3s ease;backdrop-filter:blur(5px);';
+                    const zoomImg = document.createElement('img');
+                    zoomImg.style.cssText = 'max-width:90vw;max-height:90vh;box-shadow:0 0 50px rgba(0,0,0,0.5);transform:scale(0.9);transition:transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);border: 2px solid #fff; object-fit: contain;';
+                    overlay.appendChild(zoomImg);
+                    document.body.appendChild(overlay);
+                    overlay.onclick = () => {
+                        overlay.style.opacity = '0';
+                        overlay.querySelector('img').style.transform = 'scale(0.9)';
+                        setTimeout(() => overlay.remove(), 300);
+                    };
+                }
+                const zoomImg = overlay.querySelector('img');
+                zoomImg.src = src;
+                document.body.appendChild(overlay);
+                requestAnimationFrame(() => { overlay.style.opacity = '1'; zoomImg.style.transform = 'scale(1)'; });
+            }
+        });
+        const style = document.createElement('style');
+        style.innerHTML = 'img { cursor: zoom-in; }';
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>

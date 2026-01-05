@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Santa's Workshop</title>
+    <link rel="icon" type="image/png" href="/icons/icon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Mountains+of+Christmas:wght@700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="about.css">
+</head>
+<body>
+    <ul class="lightrope">
+        <li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li>
+        <li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li>
+        <li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li>
+    </ul>
+
+    <header>
+        <div class="logo">
+            <img src="/picture/image.jpg" alt="Santa" class="logo-icon">
+            <h1>Santa's Workshop</h1>
+        </div>
+        <div class="user-profile">
+            <span>Head Elf: Luka Lanchava</span>
+            <img src="/picture/luka.png" alt="Luka" class="avatar" style="object-fit: cover;">
+        </div>
+    </header>
+
+    <nav class="main-nav">
+        <ul>
+            <li><a href="index.html">Dashboard</a></li>
+            <li><a href="wishlist.html">Wishlist</a></li>
+            <li><a href="gifts.html">Gifts</a></li>
+            <li><a href="logistics.html">Logistics</a></li>
+            <li><a href="analytics.html">Analytics</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <div style="background: rgba(0,0,0,0.3); color: #fff; padding: 10px; border-radius: 8px; margin-bottom: 1rem; display: flex; align-items: center; gap: 10px;"><span style="background: var(--christmas-red); padding: 2px 8px; border-radius: 4px; font-size: 0.8rem; font-weight: bold;">NEWS</span><marquee id="newsTicker" scrollamount="5">Loading updates...</marquee></div>
+        <div class="content-card">
+            <h2>Our Story <i class="fa-solid fa-candy-cane"></i></h2>
+            <p>Established centuries ago in the frozen heart of the North Pole, Santa's Workshop is the world's premier toy manufacturing and distribution facility. What started as a small wood-carving shop has grown into a magical global operation.</p>
+            
+            <h3>Our Mission</h3>
+            <p>To bring joy, wonder, and magic to children all over the world, one gift at a time. We believe in the spirit of giving and the power of belief. Every toy we make is infused with a little bit of North Pole magic.</p>
+
+            <div class="values-grid">
+                <div class="value-item"><span class="value-icon"><i class="fa-solid fa-wand-magic-sparkles" style="color: var(--gold);"></i></span><strong>Magic</strong></div>
+                <div class="value-item"><span class="value-icon"><i class="fa-solid fa-gift" style="color: var(--christmas-red);"></i></span><strong>Generosity</strong></div>
+                <div class="value-item"><span class="value-icon"><i class="fa-solid fa-heart" style="color: var(--christmas-green);"></i></span><strong>Kindness</strong></div>
+            </div>
+
+            <h3>The Team</h3>
+            <p>Led by Santa Claus and managed by Head Elf Bernard, our team consists of thousands of skilled craftselves, reindeer handlers, and logistics experts working around the clock to ensure Christmas Eve goes off without a hitch.</p>
+
+            <div class="signature" id="santaSig" style="cursor: pointer;">
+                - Santa Claus
+            </div>
+
+            <div style="margin-top: 3rem; text-align: center;">
+                <h3>Workshop Map</h3>
+                <div id="workshopMap" style="height: 400px; width: 100%; border-radius: 12px; border: 2px solid var(--gold); margin-top: 1rem; background-color: #0f2027;">
+                    <!-- Map will be initialized here -->
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; <span id="year"></span> Santa's Workshop Inc. | North Pole</p>
+        <p>Made with <i class="fa-solid fa-heart" style="color: var(--christmas-red);"></i> by Luka Lanchava Goa departament</p>
+        <button id="snow-toggle" style="background: none; border: 1px solid #555; color: #888; padding: 5px 10px; border-radius: 15px; cursor: pointer; margin-top: 10px; font-size: 0.8rem;">Toggle Snow</button>
+    </footer>
+
+    <!-- Custom Modal Structure -->
+    <div class="modal-overlay" id="valueModal">
+        <div class="modal">
+            <span class="modal-icon" id="modalIcon"></span>
+            <h3 id="modalTitle"></h3>
+            <p id="modalText"></p>
+            <button class="modal-btn" onclick="closeModal()">Close</button>
+        </div>
+    </div>
+
+    <audio id="bg-music" loop src="/audio/jingle-bells-445113.mp3"></audio>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+
+    <script>
+        document.getElementById('year').innerText = new Date().getFullYear();
+
+
+        // Modal Functions
+        function showModal(title, text, iconHtml) {
+            document.getElementById('modalTitle').innerText = title;
+            document.getElementById('modalText').innerText = text;
+            document.getElementById('modalIcon').innerHTML = iconHtml;
+            document.getElementById('valueModal').classList.add('active');
+        }
+
+        function closeModal() {
+            document.getElementById('valueModal').classList.remove('active');
+        }
+
+        // Realistic Snow
+        let snowInterval;
+        let snowEnabled = true;
+
+        function createSnow() {
+            if (!snowEnabled) return;
+            const snowflake = document.createElement('div');
+            snowflake.classList.add('snowflake');
+            snowflake.innerHTML = '❄';
+            snowflake.style.left = Math.random() * 100 + 'vw';
+            snowflake.style.fontSize = Math.random() * 15 + 10 + 'px';
+            snowflake.style.animationDuration = Math.random() * 5 + 3 + 's';
+            snowflake.style.opacity = Math.random();
+            document.body.appendChild(snowflake);
+            setTimeout(() => snowflake.remove(), 8000);
+        }
+        snowInterval = setInterval(createSnow, 200);
+
+        document.getElementById('snow-toggle').addEventListener('click', function() {
+            snowEnabled = !snowEnabled;
+            this.innerText = snowEnabled ? "Disable Snow" : "Enable Snow";
+            if(!snowEnabled) {
+                document.querySelectorAll('.snowflake').forEach(el => el.remove());
+            }
+        });
+
+        // Interactive Values
+        document.querySelectorAll('.value-item').forEach(item => {
+            item.style.cursor = 'pointer';
+            item.addEventListener('click', () => {
+                const text = item.querySelector('strong').innerText;
+                const icon = item.querySelector('.value-icon').innerHTML;
+                showModal(text, `At Santa's Workshop, we believe in ${text} above all else! It is the core of our magic.`, icon);
+            });
+        });
+
+        // Signature Interaction
+        document.getElementById('santaSig').addEventListener('click', function() {
+            showModal('Ho Ho Ho!', 'You found the secret message! Keep up the good work!', '<i class="fa-solid fa-santa-hat" style="color:red"></i>');
+        });
+        
+        // Initialize Workshop Map
+        const map = L.map('workshopMap').setView([83.0, -40.0], 13);
+        L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+            attribution: '© OpenStreetMap contributors, © CARTO',
+            maxZoom: 19
+        }).addTo(map);
+
+        const locations = [
+            { lat: 83.005, lng: -40.0, title: "Santa's House", icon: 'fa-house-chimney', color: 'var(--christmas-red)' },
+            { lat: 83.000, lng: -40.02, title: "Toy Factory", icon: 'fa-industry', color: 'var(--gold)' },
+            { lat: 83.002, lng: -39.98, title: "Reindeer Stables", icon: 'fa-sleigh', color: '#8B4513' },
+            { lat: 82.998, lng: -39.99, title: "Wrapping Department", icon: 'fa-gift', color: 'var(--christmas-green)' },
+            { lat: 82.995, lng: -40.03, title: "Sleigh Hangar", icon: 'fa-plane-departure', color: '#1976d2' }
+        ];
+
+        const bounds = [];
+
+        locations.forEach(loc => {
+            const customIcon = L.divIcon({
+                html: `<i class="fa-solid ${loc.icon}" style="color: ${loc.color}; font-size: 24px; text-shadow: 0 0 5px #000;"></i>`,
+                className: 'map-marker',
+                iconSize: [24, 24],
+                iconAnchor: [12, 12]
+            });
+
+            L.marker([loc.lat, loc.lng], { icon: customIcon })
+                .addTo(map)
+                .bindPopup(`<b>${loc.title}</b>`);
+            
+            bounds.push([loc.lat, loc.lng]);
+        });
+
+        if (bounds.length > 0) {
+            map.fitBounds(bounds, { padding: [50, 50] });
+        }
+
+        // Prevent page scroll when zooming map
+        const mapContainer = document.getElementById('workshopMap');
+        mapContainer.addEventListener('wheel', (e) => { e.preventDefault(); });
+
+        const musicBtn = document.getElementById('music-toggle'); 
+        const bgMusic = document.getElementById('bg-music'); 
+        
+        if (sessionStorage.getItem('musicPlaying') === 'true') {
+            bgMusic.currentTime = parseFloat(sessionStorage.getItem('musicTime') || 0);
+            bgMusic.play().catch(e => console.log("Autoplay blocked:", e));
+        }
+
+        // Music toggle removed from this page
+
+        window.addEventListener('beforeunload', () => {
+            sessionStorage.setItem('musicTime', bgMusic.currentTime);
+        });
+
+        const newsItems = ["Breaking: Elf Union reaches agreement on cookie breaks...", "Weather Alert: Heavy snow expected in sector 7...", "Toy Production: Wooden trains ahead of schedule...", "Mrs. Claus announces new hot cocoa recipe...", "Reindeer Games: Dasher takes gold in sprint..."]; setInterval(() => { const ticker = document.getElementById('newsTicker'); if(ticker) ticker.innerText = newsItems.join("  ***  "); }, 10000); setTimeout(() => { const ticker = document.getElementById('newsTicker'); if(ticker) ticker.innerText = newsItems.join("  ***  "); }, 100);
+    
+        // Global Image Zoom
+        document.addEventListener('click', function(e) {
+            if (e.target.tagName === 'IMG') {
+                e.preventDefault();
+                e.stopPropagation();
+                const src = e.target.src;
+                let overlay = document.getElementById('globalZoomOverlay');
+                if (!overlay) {
+                    overlay = document.createElement('div');
+                    overlay.id = 'globalZoomOverlay';
+                    overlay.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.9);z-index:9999999;display:flex;justify-content:center;align-items:center;cursor:zoom-out;opacity:0;transition:opacity 0.3s ease;backdrop-filter:blur(5px);';
+                    const zoomImg = document.createElement('img');
+                    zoomImg.style.cssText = 'max-width:90vw;max-height:90vh;box-shadow:0 0 50px rgba(0,0,0,0.5);transform:scale(0.9);transition:transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);border: 2px solid #fff; object-fit: contain;';
+                    overlay.appendChild(zoomImg);
+                    document.body.appendChild(overlay);
+                    overlay.onclick = () => {
+                        overlay.style.opacity = '0';
+                        overlay.querySelector('img').style.transform = 'scale(0.9)';
+                        setTimeout(() => overlay.remove(), 300);
+                    };
+                }
+                const zoomImg = overlay.querySelector('img');
+                zoomImg.src = src;
+                document.body.appendChild(overlay);
+                requestAnimationFrame(() => { overlay.style.opacity = '1'; zoomImg.style.transform = 'scale(1)'; });
+            }
+        });
+        const style = document.createElement('style');
+        style.innerHTML = 'img { cursor: zoom-in; }';
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>

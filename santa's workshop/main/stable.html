@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reindeer Stable - Santa's Workshop</title>
+    <link rel="icon" type="image/png" href="/icons/icon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Mountains+of+Christmas:wght@700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="stable.css">
+</head>
+<body>
+    <ul class="lightrope">
+        <li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li>
+        <li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li>
+        <li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li>
+    </ul>
+
+    <header>
+        <div class="logo">
+            <img src="/picture/image.jpg" alt="Santa" class="logo-icon">
+            <h1>Santa's Workshop</h1>
+        </div>
+        <div class="user-profile">
+            <span>Head Elf: Luka Lanchava</span>
+            <img src="/picture/luka.png" alt="Luka" class="avatar" style="object-fit: cover;">
+        </div>
+    </header>
+
+    <nav class="main-nav">
+        <ul>
+            <li><a href="index.html">Dashboard</a></li>
+            <li><a href="wishlist.html">Wishlist</a></li>
+            <li><a href="gifts.html">Gifts</a></li>
+            <li><a href="logistics.html">Logistics</a></li>
+            <li><a href="analytics.html">Analytics</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <div style="background: rgba(0,0,0,0.3); color: #fff; padding: 10px; border-radius: 8px; margin-bottom: 1rem; display: flex; align-items: center; gap: 10px;"><span style="background: var(--christmas-red); padding: 2px 8px; border-radius: 4px; font-size: 0.8rem; font-weight: bold;">NEWS</span><marquee id="newsTicker" scrollamount="5">Loading updates...</marquee></div>
+        <h2>Reindeer Stable Live Feed <i class="fa-solid fa-sleigh"></i></h2>
+        
+        <div class="cam-container">
+            <div class="scanlines"></div>
+            <div class="live-badge"><i class="fa-solid fa-circle"></i> LIVE</div>
+            <div style="position: absolute; top: 20px; right: 20px; color: red; font-family: monospace; font-weight: bold; animation: blink 1s infinite;">● REC</div>
+            <div style="text-align: center;">
+                <img src="/picture/deers.png" alt="Reindeer Live Feed" style="max-width: 100%; max-height: 350px; border-radius: 8px; margin-bottom: 1rem;">
+                <p>Rudolph and the team are currently resting.</p>
+                <p style="font-size: 0.8rem; color: #aaa;">Signal Strength: 98%</p>
+            </div>
+        </div>
+
+        <div class="stable-stats">
+            <div class="stat-card">
+                <h3>Temperature</h3>
+                <div class="stat-value">-24°C</div>
+                <p>Perfectly Chilly</p>
+            </div>
+            <div class="stat-card">
+                <h3>Food Supply</h3>
+                <div class="stat-value">98%</div>
+                <p>Carrots & Magic Lichen</p>
+            </div>
+            <div class="stat-card">
+                <h3>Mood</h3>
+                <div class="stat-value">Excited</div>
+                <p>Ready for Flight</p>
+            </div>
+        </div>
+        <div style="text-align: center; margin-top: 2rem;">
+            <button class="music-btn" style="background: var(--christmas-green); border: none;" onclick="feedReindeer()"><i class="fa-solid fa-carrot"></i> Feed Crew</button>
+        </div>
+
+        <div style="margin-top: 2rem; text-align: center;">
+            <a href="#" onclick="alert('Ordering 500lbs of Magic Carrots...')">
+                <img src="https://placehold.co/600x150/e65100/FFF?text=Order+Magic+Carrots+Here+-+Express+Delivery" alt="Carrots" style="border-radius:12px; max-width:100%; border: 2px solid var(--gold);">
+            </a>
+        </div>
+
+        <div class="roster-section">
+            <h3><i class="fa-solid fa-horse-head"></i> Active Flight Crew</h3>
+            <div class="roster-grid">
+                <div class="deer-card"><strong>Dasher</strong><div class="deer-status">Speed: 10/10</div></div>
+                <div class="deer-card"><strong>Dancer</strong><div class="deer-status">Agility: 9/10</div></div>
+                <div class="deer-card"><strong>Prancer</strong><div class="deer-status">Style: 10/10</div></div>
+                <div class="deer-card"><strong>Vixen</strong><div class="deer-status">Magic: 8/10</div></div>
+                <div class="deer-card"><strong>Comet</strong><div class="deer-status">Stamina: 9/10</div></div>
+                <div class="deer-card"><strong>Cupid</strong><div class="deer-status">Charisma: 10/10</div></div>
+                <div class="deer-card"><strong>Donner</strong><div class="deer-status">Strength: 10/10</div></div>
+                <div class="deer-card"><strong>Blitzen</strong><div class="deer-status">Power: 9/10</div></div>
+                <div class="deer-card" style="border-color: var(--christmas-red); background: #ffebee;"><strong>Rudolph</strong><div class="deer-status">Nose Brightness: 100%</div></div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; <span id="year"></span> Santa's Workshop Inc. | North Pole</p>
+        <p>Made with <i class="fa-solid fa-heart" style="color: var(--christmas-red);"></i> by Luka Lanchava Goa departament</p>
+        <button id="snow-toggle" style="background: none; border: 1px solid #555; color: #888; padding: 5px 10px; border-radius: 15px; cursor: pointer; margin-top: 10px; font-size: 0.8rem;">Toggle Snow</button>
+    </footer>
+
+    <!-- Custom Modal Structure -->
+    <div class="modal-overlay" id="valueModal">
+        <div class="modal">
+            <span class="modal-icon" id="modalIcon"></span>
+            <h3 id="modalTitle"></h3>
+            <p id="modalText"></p>
+            <button class="modal-btn" onclick="closeModal()">Close</button>
+        </div>
+    </div>
+
+    <audio id="bg-music" loop src="/audio/jingle-bells-445113.mp3"></audio>
+    <audio id="hover-sound" src="/audio/sleigh-bells.mp3"></audio>
+
+    <script>
+        document.getElementById('year').innerText = new Date().getFullYear();
+
+        // Music Toggle
+        const musicBtn = document.getElementById('music-toggle'); 
+        const bgMusic = document.getElementById('bg-music'); 
+        const hoverSound = document.getElementById('hover-sound');
+
+        if (sessionStorage.getItem('musicPlaying') === 'true') {
+            bgMusic.currentTime = parseFloat(sessionStorage.getItem('musicTime') || 0);
+            bgMusic.play().catch(e => console.log("Autoplay blocked:", e));
+        }
+
+        // Music toggle removed from this page
+
+        window.addEventListener('beforeunload', () => {
+            sessionStorage.setItem('musicTime', bgMusic.currentTime);
+        });
+
+        // Simulate Live Feed Stats
+        setInterval(() => {
+            const signal = 95 + Math.floor(Math.random() * 5);
+            document.querySelector('.cam-container p:last-child').innerText = `Signal Strength: ${signal}%`;
+            
+            const food = 90 + Math.floor(Math.random() * 10);
+            document.querySelectorAll('.stat-value')[1].innerText = `${food}%`;
+        }, 3000);
+
+        // Feed Reindeer Function
+        function feedReindeer() {
+            const btn = document.querySelector('button[onclick="feedReindeer()"]');
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Feeding...';
+            setTimeout(() => {
+                btn.innerHTML = '<i class="fa-solid fa-check"></i> Fed!';
+                document.querySelectorAll('.stat-value')[1].innerText = "100%";
+                setTimeout(() => btn.innerHTML = originalText, 2000);
+            }, 1000);
+        }
+
+        // Pet Reindeer
+        document.querySelectorAll('.deer-card').forEach(card => {
+            card.style.cursor = 'pointer';
+            card.addEventListener('click', function() {
+                const name = this.querySelector('strong').innerText;
+                alert(`You petted ${name}! They seem happy. 🦌❤️`);
+                this.style.transform = "scale(1.1)";
+                setTimeout(() => this.style.transform = "scale(1)", 200);
+            });
+        });
+
+        // Hover Effects
+        document.querySelectorAll('button, a, .stat-card').forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                hoverSound.currentTime = 0;
+                hoverSound.play().catch(() => {});
+            });
+        });
+
+        // Realistic Snow
+        let snowInterval;
+        let snowEnabled = true;
+
+        function createSnow() {
+            if (!snowEnabled) return;
+            const snowflake = document.createElement('div');
+            snowflake.classList.add('snowflake');
+            snowflake.innerHTML = '❄';
+            snowflake.style.left = Math.random() * 100 + 'vw';
+            snowflake.style.fontSize = Math.random() * 15 + 10 + 'px';
+            snowflake.style.animationDuration = Math.random() * 5 + 3 + 's';
+            snowflake.style.opacity = Math.random();
+            document.body.appendChild(snowflake);
+            setTimeout(() => snowflake.remove(), 8000);
+        }
+        snowInterval = setInterval(createSnow, 200);
+
+        document.getElementById('snow-toggle').addEventListener('click', function() {
+            snowEnabled = !snowEnabled;
+            this.innerText = snowEnabled ? "Disable Snow" : "Enable Snow";
+            if(!snowEnabled) {
+                document.querySelectorAll('.snowflake').forEach(el => el.remove());
+            }
+        });
+
+        // Custom Modal Override
+        window.alert = function(msg) {
+            document.getElementById('modalTitle').innerText = "Notification";
+            document.getElementById('modalText').innerText = msg;
+            document.getElementById('modalIcon').innerHTML = '<i class="fa-solid fa-bell" style="color: var(--gold);"></i>';
+            document.getElementById('valueModal').classList.add('active');
+        }
+        function closeModal() {
+            document.getElementById('valueModal').classList.remove('active');
+        }
+        const newsItems = ["Breaking: Elf Union reaches agreement on cookie breaks...", "Weather Alert: Heavy snow expected in sector 7...", "Toy Production: Wooden trains ahead of schedule...", "Mrs. Claus announces new hot cocoa recipe...", "Reindeer Games: Dasher takes gold in sprint..."]; setInterval(() => { const ticker = document.getElementById('newsTicker'); if(ticker) ticker.innerText = newsItems.join("  ***  "); }, 10000); setTimeout(() => { const ticker = document.getElementById('newsTicker'); if(ticker) ticker.innerText = newsItems.join("  ***  "); }, 100);
+    
+        function toggleElfZoom() {
+            let overlay = document.getElementById('elfZoomOverlay');
+            if (!overlay) {
+                overlay = document.createElement('div');
+                overlay.id = 'elfZoomOverlay';
+                overlay.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.85);z-index:999999;display:flex;justify-content:center;align-items:center;cursor:zoom-out;opacity:0;transition:opacity 0.3s ease;backdrop-filter:blur(5px);';
+                overlay.innerHTML = '<img src="/picture/luka.png" style="max-width:80vh;max-height:80vh;border-radius:50%;box-shadow:0 0 50px rgba(255,215,0,0.3);transform:scale(0.5);transition:transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);border: 4px solid var(--gold);">';
+                document.body.appendChild(overlay);
+                overlay.onclick = () => {
+                    overlay.style.opacity = '0';
+                    overlay.querySelector('img').style.transform = 'scale(0.5)';
+                    setTimeout(() => overlay.remove(), 300);
+                };
+                requestAnimationFrame(() => { overlay.style.opacity = '1'; overlay.querySelector('img').style.transform = 'scale(1)'; });
+            }
+        }
+    </script>
+</body>
+</html>

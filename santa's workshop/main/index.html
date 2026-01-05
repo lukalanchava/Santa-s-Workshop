@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Santa's Workshop - North Pole Operations</title>
+    <link rel="icon" type="image/png" href="/icons/icon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Mountains+of+Christmas:wght@700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+
+    <div class="aurora"></div>
+    <ul class="lightrope">
+        <li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li>
+        <li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li>
+        <li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li>
+    </ul>
+
+    <header>
+        <div class="logo">
+            <img src="/picture/image.jpg" alt="Santa" class="logo-icon">
+            <h1>Santa's Workshop</h1>
+        </div>
+        <button id="music-toggle" class="music-btn"><i class="fa-solid fa-volume-xmark"></i> Music Off</button>
+        <div class="user-profile">
+            <span>Head Elf: Luka Lanchava</span>
+            <img src="/picture/luka.png" alt="Luka" class="avatar" style="object-fit: cover;">
+        </div>
+    </header>
+
+    <nav class="main-nav">
+        <ul>
+            <li><a href="index.html">Dashboard</a></li>
+            <li><a href="wishlist.html">Wishlist</a></li>
+            <li><a href="gifts.html">Gifts</a></li>
+            <li><a href="logistics.html">Logistics</a></li>
+            <li><a href="analytics.html">Analytics</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <!-- News Ticker -->
+        <div style="background: rgba(0,0,0,0.3); color: #fff; padding: 10px; border-radius: 8px; margin-bottom: 1rem; display: flex; align-items: center; gap: 10px;">
+            <span style="background: var(--christmas-red); padding: 2px 8px; border-radius: 4px; font-size: 0.8rem; font-weight: bold;">NEWS</span>
+            <div class="ticker-wrap">
+                <div class="ticker" id="newsTicker">Breaking: Elf Union reaches agreement on cookie breaks... Rudolph's nose brightness up 15%...</div>
+            </div>
+        </div>
+
+        <div class="hero-banner">
+            <div class="hero-content">
+                <h2>Operations Dashboard</h2>
+                <p>System Status: <span style="color: #81c784; font-weight: bold;">ALL SYSTEMS GO</span></p>
+                <div class="countdown-display" id="countdown">Loading Countdown...</div>
+            </div>
+            <div style="font-size: 5rem; opacity: 0.8;"><i class="fa-solid fa-tree"></i></div>
+        </div>
+
+        <div class="dashboard-grid">
+            
+            <!-- Toy Production -->
+            <div class="card production">
+                <div class="card-header">
+                    <h3><i class="fa-solid fa-gift"></i> Toy Production</h3>
+                    <span style="font-size: 0.8rem; color: #666;">Target: 100%</span>
+                </div>
+                <div class="stat-row">
+                    <div class="stat-label"><span>Electronics</span><span>92%</span></div>
+                    <div class="progress-bar"><div class="progress-fill fill-green" style="width: 92%"></div></div>
+                </div>
+                <div class="stat-row">
+                    <div class="stat-label"><span>Toys</span><span>85%</span></div>
+                    <div class="progress-bar"><div class="progress-fill fill-red" style="width: 85%"></div></div>
+                </div>
+                <div class="stat-row">
+                    <div class="stat-label"><span>Educational</span><span>78%</span></div>
+                    <div class="progress-bar"><div class="progress-fill fill-gold" style="width: 78%"></div></div>
+                </div>
+                <button class="action-btn" onclick="window.location.href='gifts.html'">View Inventory Report</button>
+            </div>
+
+            <!-- Naughty or Nice List -->
+            <div class="card list">
+                <div class="card-header">
+                    <h3><i class="fa-solid fa-scroll"></i> Naughty & Nice List</h3>
+                    <span style="font-size: 0.8rem; color: #666;">Live Updates</span>
+                </div>
+                <div style="display: flex; justify-content: space-around; text-align: center; margin-bottom: 1rem;">
+                    <div>
+                        <div style="font-size: 2rem; color: var(--christmas-green); font-weight: bold;">1.2B</div>
+                        <div style="font-size: 0.8rem; color: #666;">Nice List</div>
+                    </div>
+                    <div>
+                        <div style="font-size: 2rem; color: var(--christmas-red); font-weight: bold;">450k</div>
+                        <div style="font-size: 0.8rem; color: #666;">Naughty List</div>
+                    </div>
+                </div>
+                <div class="stat-row">
+                    <div class="stat-label"><span>Processing Letters</span><span>98% Complete</span></div>
+                    <div class="progress-bar"><div class="progress-fill fill-gold" style="width: 98%"></div></div>
+                </div>
+                <button class="action-btn" onclick="window.location.href='wishlist.html'">Manage List</button>
+            </div>
+
+            <!-- Reindeer Status -->
+            <div class="card reindeer">
+                <div class="card-header">
+                    <h3><i class="fa-solid fa-sleigh"></i> Reindeer Stable</h3>
+                    <span style="font-size: 0.8rem; color: #666;">Flight Prep</span>
+                </div>
+                <ul class="reindeer-list">
+                    <li class="reindeer-item"><span>Dasher</span> <span class="status-badge status-ready">Ready</span></li>
+                    <li class="reindeer-item"><span>Dancer</span> <span class="status-badge status-ready">Ready</span></li>
+                    <li class="reindeer-item"><span>Prancer</span> <span class="status-badge status-ready">Ready</span></li>
+                    <li class="reindeer-item"><span>Rudolph</span> <span class="status-badge status-resting">Nose Polishing</span></li>
+                </ul>
+                <button class="action-btn" style="background-color: #8B4513;" onclick="window.location.href='stable.html'">Stable Cam</button>
+            </div>
+
+            <!-- North Pole Weather -->
+            <div class="card weather">
+                <div class="card-header">
+                    <h3><i class="fa-solid fa-snowflake"></i> North Pole Weather</h3>
+                </div>
+                <div class="weather-widget">
+                    <div style="font-size: 3rem;"><i class="fa-solid fa-cloud-meatball"></i></div>
+                    <div class="weather-temp">-24°C</div>
+                    <div class="weather-desc">Heavy Snowfall</div>
+                    <div style="margin-top: 10px; font-size: 0.9rem;">Wind: 15km/h N</div>
+                </div>
+                <div style="margin-top: 1rem; text-align: center; font-size: 0.9rem; color: #666;">
+                    Sleigh Flight Conditions: <span style="color: var(--christmas-green); font-weight: bold;">Optimal</span>
+                </div>
+            </div>
+
+            <!-- Elf of the Month -->
+            <div class="card elf-month">
+                <div class="card-header">
+                    <h3><i class="fa-solid fa-trophy"></i> Elf of the Month</h3>
+                </div>
+                <div style="text-align: center;">
+                    <div style="font-size: 3rem; margin-bottom: 0.5rem;"><i class="fa-solid fa-hat-wizard"></i></div>
+                    <h4 style="margin: 0; color: var(--christmas-green);">Alabaster Snowball</h4>
+                    <p style="font-size: 0.9rem; color: #666; margin-top: 5px;">For optimizing the candy cane striping algorithm by 400%.</p>
+                </div>
+            </div>
+
+            <!-- Sleigh Tracker Link -->
+            <div class="card tracker">
+                <div class="card-header">
+                    <h3><i class="fa-solid fa-map-location-dot"></i> Sleigh Tracker</h3>
+                </div>
+                <a href="logistics.html" style="display: block; transition: transform 0.3s;">
+                    <img src="https://placehold.co/400x200/165B33/FFF?text=Live+Sleigh+Map" alt="Sleigh Map" style="width:100%; border-radius:10px; border: 2px solid rgba(255,255,255,0.2);">
+                </a>
+                <p style="margin-top:10px; font-size:0.9rem;">Current Location: North Pole (Loading...)</p>
+            </div>
+
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; <span id="year"></span> Santa's Workshop Inc. | North Pole</p>
+        <p>Made with <i class="fa-solid fa-heart" style="color: var(--christmas-red);"></i> by Luka Lanchava Goa departament</p>
+        <button id="snow-toggle" style="background: none; border: 1px solid #555; color: #888; padding: 5px 10px; border-radius: 15px; cursor: pointer; margin-top: 10px; font-size: 0.8rem;">Toggle Snow</button>
+    </footer>
+
+    <!-- Custom Modal Structure -->
+    <div class="modal-overlay" id="valueModal">
+        <div class="modal">
+            <span class="modal-icon" id="modalIcon"></span>
+            <h3 id="modalTitle"></h3>
+            <p id="modalText"></p>
+            <button class="modal-btn" onclick="closeModal()">Close</button>
+        </div>
+    </div>
+
+    <audio id="bg-music" loop src="/audio/jingle-bells-445113.mp3"></audio>
+    <audio id="hover-sound" src="/audio/sleigh-bells.mp3"></audio>
+
+    <script>
+        // Set current year in footer
+        document.getElementById('year').innerText = new Date().getFullYear();
+
+        function updateCountdown() {
+            const now = new Date();
+            const currentYear = now.getFullYear();
+            let christmas = new Date(currentYear, 11, 25); // Month is 0-indexed (11 is Dec)
+
+            // If Christmas has passed this year, count to next year
+            if (now > christmas) {
+                christmas = new Date(currentYear + 1, 11, 25);
+            }
+
+            const diff = christmas - now;
+            
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+            document.getElementById('countdown').innerText = 
+                `${days}d ${hours}h ${minutes}m ${seconds}s until Christmas`;
+        }
+
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+
+        // Music Toggle
+        const musicBtn = document.getElementById('music-toggle'); 
+        const bgMusic = document.getElementById('bg-music');
+        const hoverSound = document.getElementById('hover-sound');
+
+        if (sessionStorage.getItem('musicPlaying') === 'true') {
+            bgMusic.currentTime = parseFloat(sessionStorage.getItem('musicTime') || 0);
+            bgMusic.play().catch(e => console.log("Autoplay blocked:", e));
+            musicBtn.innerHTML = '<i class="fa-solid fa-music"></i> Music On';
+        }
+
+        musicBtn.addEventListener('click', () => {
+            if (bgMusic.paused) {
+                bgMusic.play();
+                musicBtn.innerHTML = '<i class="fa-solid fa-music"></i> Music On';
+                sessionStorage.setItem('musicPlaying', 'true');
+            } else {
+                bgMusic.pause();
+                musicBtn.innerHTML = '<i class="fa-solid fa-volume-xmark"></i> Music Off';
+                sessionStorage.setItem('musicPlaying', 'false');
+            }
+        });
+
+        window.addEventListener('beforeunload', () => {
+            sessionStorage.setItem('musicTime', bgMusic.currentTime);
+        });
+
+        // Dynamic System Status Simulation
+        function updateSystemStatus() {
+            const statuses = [
+                "ALL SYSTEMS GO",
+                "OPTIMIZING SLEIGH AERODYNAMICS",
+                "CALIBRATING TOY FABRICATORS",
+                "CHECKING NAUGHTY LIST INTEGRITY"
+            ];
+            const randomStatus = statuses[Math.floor(Math.random() * statuses.length)];
+            document.querySelector('.hero-content p span').innerText = randomStatus;
+        }
+        setInterval(updateSystemStatus, 5000);
+
+        // Hover Effects
+        document.querySelectorAll('button, a, .card').forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                hoverSound.currentTime = 0;
+                hoverSound.play().catch(() => {});
+            });
+        });
+
+        // Time-based Greeting
+        function updateGreeting() {
+            const hour = new Date().getHours();
+            let greeting = "Operations Dashboard";
+            if (hour < 12) greeting = "Good Morning, Santa";
+            else if (hour < 18) greeting = "Good Afternoon, Santa";
+            else greeting = "Good Evening, Santa";
+            
+            const title = document.querySelector('.hero-content h2');
+            if(title.innerText === "Operations Dashboard") {
+                title.innerText = greeting;
+            }
+        }
+        updateGreeting();
+
+        // Simulate Active Elves Count
+        const productionCard = document.querySelector('.card.production .card-header span');
+        setInterval(() => {
+            const activeElves = 4000 + Math.floor(Math.random() * 500);
+            productionCard.innerText = `Active Elves: ${activeElves.toLocaleString()}`;
+        }, 3000);
+
+        // News Ticker Updates
+        const newsItems = [
+            "Breaking: Elf Union reaches agreement on cookie breaks...",
+            "Weather Alert: Heavy snow expected in sector 7...",
+            "Toy Production: Wooden trains ahead of schedule...",
+            "Mrs. Claus announces new hot cocoa recipe...",
+            "Reindeer Games: Dasher takes gold in sprint..."
+        ];
+        
+        // Initialize ticker content once
+        document.getElementById('newsTicker').innerText = newsItems.join("  ***  ") + "  ***  " + newsItems.join("  ***  ");
+
+        // Realistic Snow
+        let snowInterval;
+        let snowEnabled = true;
+
+        function createSnow() {
+            if (!snowEnabled) return;
+            const snowflake = document.createElement('div');
+            snowflake.classList.add('snowflake');
+            snowflake.innerHTML = '❄';
+            snowflake.style.left = Math.random() * 100 + 'vw';
+            snowflake.style.fontSize = Math.random() * 15 + 10 + 'px';
+            snowflake.style.animationDuration = Math.random() * 5 + 3 + 's';
+            snowflake.style.opacity = Math.random();
+            document.body.appendChild(snowflake);
+            setTimeout(() => snowflake.remove(), 8000);
+        }
+        snowInterval = setInterval(createSnow, 200);
+
+        document.getElementById('snow-toggle').addEventListener('click', function() {
+            snowEnabled = !snowEnabled;
+            this.innerText = snowEnabled ? "Disable Snow" : "Enable Snow";
+            if(!snowEnabled) {
+                document.querySelectorAll('.snowflake').forEach(el => el.remove());
+            }
+        });
+
+        // Custom Modal Override
+        window.alert = function(msg) {
+            document.getElementById('modalTitle').innerText = "Notification";
+            document.getElementById('modalText').innerText = msg;
+            document.getElementById('modalIcon').innerHTML = '<i class="fa-solid fa-bell" style="color: var(--gold);"></i>';
+            document.getElementById('valueModal').classList.add('active');
+        }
+        function closeModal() {
+            document.getElementById('valueModal').classList.remove('active');
+        }
+
+        // Global Image Zoom
+        document.addEventListener('click', function(e) {
+            if (e.target.tagName === 'IMG') {
+                e.preventDefault();
+                e.stopPropagation();
+                const src = e.target.src;
+                let overlay = document.getElementById('globalZoomOverlay');
+                if (!overlay) {
+                    overlay = document.createElement('div');
+                    overlay.id = 'globalZoomOverlay';
+                    overlay.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.9);z-index:9999999;display:flex;justify-content:center;align-items:center;cursor:zoom-out;opacity:0;transition:opacity 0.3s ease;backdrop-filter:blur(5px);';
+                    const zoomImg = document.createElement('img');
+                    zoomImg.style.cssText = 'max-width:90vw;max-height:90vh;box-shadow:0 0 50px rgba(0,0,0,0.5);transform:scale(0.9);transition:transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);border: 2px solid #fff; object-fit: contain;';
+                    overlay.appendChild(zoomImg);
+                    document.body.appendChild(overlay);
+                    overlay.onclick = () => {
+                        overlay.style.opacity = '0';
+                        overlay.querySelector('img').style.transform = 'scale(0.9)';
+                        setTimeout(() => overlay.remove(), 300);
+                    };
+                }
+                const zoomImg = overlay.querySelector('img');
+                zoomImg.src = src;
+                document.body.appendChild(overlay);
+                requestAnimationFrame(() => { overlay.style.opacity = '1'; zoomImg.style.transform = 'scale(1)'; });
+            }
+        });
+        const style = document.createElement('style');
+        style.innerHTML = 'img { cursor: zoom-in; }';
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>

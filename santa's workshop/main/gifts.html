@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gifts Inventory - Santa's Workshop</title>
+    <link rel="icon" type="image/png" href="/icons/icon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Mountains+of+Christmas:wght@700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="gifts.css">
+    <style>
+        .gift-card {
+            background: #ffffff;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            border: 1px solid #eee;
+            margin-top: 0;
+        }
+        
+        .gift-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.12);
+            border-color: #e0e0e0;
+        }
+
+        /* Elegant Ribbon */
+        .gift-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 20px;
+            width: 30px;
+            height: 100%;
+            background: linear-gradient(to bottom, #d32f2f, #b71c1c);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            z-index: 0;
+        }
+
+        /* Gold Thread */
+        .gift-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 32px;
+            width: 6px;
+            height: 100%;
+            background: linear-gradient(to bottom, #FFD700, #FFA000);
+            z-index: 0;
+        }
+
+        .gift-card > * {
+            position: relative;
+            z-index: 1;
+        }
+    </style>
+</head>
+<body>
+    <ul class="lightrope">
+        <li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li>
+        <li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li>
+        <li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li>
+    </ul>
+
+    <header>
+        <div class="logo">
+            <img src="/picture/image.jpg" alt="Santa" class="logo-icon">
+            <h1>Santa's Workshop</h1>
+        </div>
+        <div class="user-profile">
+            <span>Head Elf: Luka Lanchava</span>
+            <img src="/picture/luka.png" alt="Luka" class="avatar" style="object-fit: cover;">
+        </div>
+    </header>
+
+    <nav class="main-nav">
+        <ul>
+            <li><a href="index.html">Dashboard</a></li>
+            <li><a href="wishlist.html">Wishlist</a></li>
+            <li><a href="gifts.html">Gifts</a></li>
+            <li><a href="logistics.html">Logistics</a></li>
+            <li><a href="analytics.html">Analytics</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <div style="background: rgba(0,0,0,0.3); color: #fff; padding: 10px; border-radius: 8px; margin-bottom: 1rem; display: flex; align-items: center; gap: 10px;">
+            <span style="background: var(--christmas-red); padding: 2px 8px; border-radius: 4px; font-size: 0.8rem; font-weight: bold;">NEWS</span>
+            <div class="ticker-wrap">
+                <div class="ticker" id="newsTicker">Loading updates...</div>
+            </div>
+        </div>
+        <h2>Toy Inventory <i class="fa-solid fa-gifts"></i></h2>
+        <a href="#" class="promo-link" onclick="alert('Redirecting to Wrapping Department...')" style="display: block; margin-bottom: 2rem;">
+            <img src="https://placehold.co/1200x150/c62828/FFF?text=Visit+Wrapping+Department+-+Click+Here" alt="Wrapping" style="width:100%; border-radius:16px; border: 2px solid var(--gold); box-shadow: 0 5px 15px rgba(0,0,0,0.2);">
+        </a>
+
+        <div class="filter-bar" style="flex-wrap: wrap;">
+            <input type="text" id="searchInput" placeholder="Search toys..." style="padding: 10px 20px; border-radius: 30px; border: none; width: 100%; max-width: 300px; margin-bottom: 10px;" onkeyup="filterGifts()">
+            <button class="filter-btn active">All Items</button>
+            <button class="filter-btn">Electronics</button>
+            <button class="filter-btn">Traditional Toys</button>
+            <button class="filter-btn">Sports</button>
+        </div>
+        
+        <div style="position: fixed; bottom: 20px; right: 20px; background: var(--gold); padding: 15px 25px; border-radius: 30px; font-weight: bold; box-shadow: 0 5px 20px rgba(0,0,0,0.3); z-index: 1000; display: flex; align-items: center; gap: 10px;">
+            <i class="fa-solid fa-sleigh"></i> Sleigh Load: <span id="sleighCounter">0</span>
+        </div>
+
+        <div class="gifts-grid" id="giftsGrid">
+            <div class="gift-card">
+                <div class="badge-choice">Top Seller</div>
+                <img src="/picture/pc.png" alt="Gaming PC" style="height: 10rem; margin-bottom: 1rem; mix-blend-mode: multiply;">
+                <h3>Gaming PC</h3>
+                <p>High-performance computer with RGB lighting.</p>
+                <div class="stock-level">Stock: 15,000</div>
+                <button class="filter-btn" style="margin-top: 10px; background: var(--christmas-green); border: none;" onclick="addToSleigh(this)">Add to Sleigh</button>
+            </div>
+            <div class="gift-card">
+                <div class="badge-choice">Santa's Pick <i class="fa-solid fa-star"></i></div>
+                <img src="/picture/robot.png" alt="Robot" style="height: 10rem; margin-bottom: 1rem; mix-blend-mode: multiply;">
+                <h3>Robot</h3>
+                <p>Smart AI robot with voice commands.</p>
+                <div class="stock-level">Stock: 8,400</div>
+                <button class="filter-btn" style="margin-top: 10px; background: var(--christmas-green); border: none;" onclick="addToSleigh(this)">Add to Sleigh</button>
+            </div>
+            <div class="gift-card">
+                <img src="/picture/console.png" alt="Game Console" style="height: 10rem; margin-bottom: 1rem; mix-blend-mode: multiply;">
+                <h3>Game Console</h3>
+                <p>Latest gen electronics (PlayStation 5).</p>
+                <div class="stock-level">Stock: 2,100</div>
+                <button class="filter-btn" style="margin-top: 10px; background: var(--christmas-green); border: none;" onclick="addToSleigh(this)">Add to Sleigh</button>
+            </div>
+            <div class="gift-card">
+                <img src="/picture/ak-47.png" alt="ak-47" style="height: 10rem; margin-bottom: 1rem; mix-blend-mode: multiply;">
+                <h3>ak-47</h3>
+                <p>Red with streamers and training wheels.</p>
+                <div class="stock-level">Stock: 5,600</div>
+                <button class="filter-btn" style="margin-top: 10px; background: var(--christmas-green); border: none;" onclick="addToSleigh(this)">Add to Sleigh</button>
+            </div>
+            <div class="gift-card">
+                 <img src="/picture/laptop.png" alt="Laptop" style="height: 10rem; margin-bottom: 1rem; mix-blend-mode: multiply;">
+                <h3>Laptop</h3>
+                <p>High-performance laptop for gaming and work.</p>
+                <div class="stock-level">Stock: 12,300</div>
+                <button class="filter-btn" style="margin-top: 10px; background: var(--christmas-green); border: none;" onclick="addToSleigh(this)">Add to Sleigh</button>
+            </div>
+            <div class="gift-card">
+                <span class="gift-icon"><i class="fa-solid fa-futbol" style="color: #333;"></i></span>
+                <h3>Soccer Ball</h3>
+                <p>Regulation size, durable stitching.</p>
+                <div class="stock-level">Stock: 9,200</div>
+                <button class="filter-btn" style="margin-top: 10px; background: var(--christmas-green); border: none;" onclick="addToSleigh(this)">Add to Sleigh</button>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; <span id="year"></span> Santa's Workshop Inc. | North Pole</p>
+        <p>Made with <i class="fa-solid fa-heart" style="color: var(--christmas-red);"></i> by Luka Lanchava Goa departament</p>
+        <button id="snow-toggle" style="background: none; border: 1px solid #555; color: #888; padding: 5px 10px; border-radius: 15px; cursor: pointer; margin-top: 10px; font-size: 0.8rem;">Toggle Snow</button>
+    </footer>
+
+    <!-- Custom Modal Structure -->
+    <div class="modal-overlay" id="valueModal">
+        <div class="modal">
+            <span class="modal-icon" id="modalIcon"></span>
+            <h3 id="modalTitle"></h3>
+            <p id="modalText"></p>
+            <button class="modal-btn" onclick="closeModal()">Close</button>
+        </div>
+    </div>
+
+    <audio id="bg-music" loop src="/audio/jingle-bells-445113.mp3"></audio>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.7.0/vanilla-tilt.min.js"></script>
+
+    <script>
+        document.getElementById('year').innerText = new Date().getFullYear();
+
+        function filterGifts() {
+            const input = document.getElementById('searchInput');
+            const filter = input.value.toUpperCase();
+            const grid = document.getElementById('giftsGrid');
+            const cards = grid.getElementsByClassName('gift-card');
+
+            for (let i = 0; i < cards.length; i++) {
+                const h3 = cards[i].getElementsByTagName("h3")[0];
+                const txtValue = h3.textContent || h3.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    cards[i].style.display = "";
+                } else {
+                    cards[i].style.display = "none";
+                }
+            }
+        }
+
+        // Auto-highlight Low Stock
+        function checkStockLevels() {
+            const cards = document.querySelectorAll('.gift-card');
+            cards.forEach(card => {
+                const stockText = card.querySelector('.stock-level').innerText;
+                const stockNum = parseInt(stockText.replace(/[^0-9]/g, ''));
+                if (stockNum < 5000) {
+                    card.querySelector('.stock-level').style.backgroundColor = '#ffcdd2';
+                    card.querySelector('.stock-level').style.color = '#c62828';
+                    card.querySelector('.stock-level').innerHTML += ' <i class="fa-solid fa-triangle-exclamation"></i> Low Stock';
+                }
+            });
+        }
+        checkStockLevels();
+
+        // Add to Sleigh Logic
+        let sleighCount = 0;
+        function addToSleigh(btn) {
+            sleighCount++;
+            document.getElementById('sleighCounter').innerText = sleighCount;
+            
+            // Animation
+            btn.innerText = "Added!";
+            btn.style.background = "#4caf50";
+            setTimeout(() => {
+                btn.innerText = "Add to Sleigh";
+                btn.style.background = "var(--christmas-green)";
+            }, 1000);
+
+            // Flying Gift Animation
+            const flyingGift = document.createElement('div');
+            flyingGift.innerHTML = '<i class="fa-solid fa-gift" style="color: var(--gold); font-size: 20px;"></i>';
+            flyingGift.style.position = 'fixed';
+            flyingGift.style.left = btn.getBoundingClientRect().left + 'px';
+            flyingGift.style.top = btn.getBoundingClientRect().top + 'px';
+            flyingGift.style.transition = 'all 0.8s ease-in-out';
+            flyingGift.style.zIndex = '9999';
+            document.body.appendChild(flyingGift);
+            
+            setTimeout(() => {
+                flyingGift.style.top = (window.innerHeight - 50) + 'px';
+                flyingGift.style.left = (window.innerWidth - 50) + 'px';
+                flyingGift.style.opacity = '0';
+            }, 50);
+            setTimeout(() => flyingGift.remove(), 850);
+        }
+
+        // Realistic Snow
+        let snowInterval;
+        let snowEnabled = true;
+
+        function createSnow() {
+            if (!snowEnabled) return;
+            const snowflake = document.createElement('div');
+            snowflake.classList.add('snowflake');
+            snowflake.innerHTML = '❄';
+            snowflake.style.left = Math.random() * 100 + 'vw';
+            snowflake.style.fontSize = Math.random() * 15 + 10 + 'px';
+            snowflake.style.animationDuration = Math.random() * 5 + 3 + 's';
+            snowflake.style.opacity = Math.random();
+            document.body.appendChild(snowflake);
+            setTimeout(() => snowflake.remove(), 8000);
+        }
+        snowInterval = setInterval(createSnow, 200);
+
+        document.getElementById('snow-toggle').addEventListener('click', function() {
+            snowEnabled = !snowEnabled;
+            this.innerText = snowEnabled ? "Disable Snow" : "Enable Snow";
+            if(!snowEnabled) {
+                document.querySelectorAll('.snowflake').forEach(el => el.remove());
+            }
+        });
+
+        // Custom Modal Override
+        window.alert = function(msg) {
+            document.getElementById('modalTitle').innerText = "Notification";
+            document.getElementById('modalText').innerText = msg;
+            document.getElementById('modalIcon').innerHTML = '<i class="fa-solid fa-bell" style="color: var(--gold);"></i>';
+            document.getElementById('valueModal').classList.add('active');
+        }
+        function closeModal() {
+            document.getElementById('valueModal').classList.remove('active');
+        }
+
+        const musicBtn = document.getElementById('music-toggle'); 
+        const bgMusic = document.getElementById('bg-music'); 
+        
+        if (sessionStorage.getItem('musicPlaying') === 'true') {
+            bgMusic.currentTime = parseFloat(sessionStorage.getItem('musicTime') || 0);
+            bgMusic.play().catch(e => console.log("Autoplay blocked:", e));
+        }
+
+        // Music toggle removed from this page
+
+        window.addEventListener('beforeunload', () => {
+            sessionStorage.setItem('musicTime', bgMusic.currentTime);
+        });
+
+        const newsItems = ["Breaking: Elf Union reaches agreement on cookie breaks...", "Weather Alert: Heavy snow expected in sector 7...", "Toy Production: Wooden trains ahead of schedule...", "Mrs. Claus announces new hot cocoa recipe...", "Reindeer Games: Dasher takes gold in sprint..."]; 
+        
+        // Fix ticker logic
+        const ticker = document.getElementById('newsTicker');
+        if(ticker) {
+            ticker.innerText = newsItems.join("  ***  ") + "  ***  " + newsItems.join("  ***  ");
+        }
+
+        // 3D Tilt Effect
+        VanillaTilt.init(document.querySelectorAll(".gift-card"), { max: 15, speed: 400, glare: true, "max-glare": 0.2, scale: 1.05 });
+    
+        // Global Image Zoom
+        document.addEventListener('click', function(e) {
+            if (e.target.tagName === 'IMG') {
+                e.preventDefault();
+                e.stopPropagation();
+                const src = e.target.src;
+                let overlay = document.getElementById('globalZoomOverlay');
+                if (!overlay) {
+                    overlay = document.createElement('div');
+                    overlay.id = 'globalZoomOverlay';
+                    overlay.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.9);z-index:9999999;display:flex;justify-content:center;align-items:center;cursor:zoom-out;opacity:0;transition:opacity 0.3s ease;backdrop-filter:blur(5px);';
+                    const zoomImg = document.createElement('img');
+                    zoomImg.style.cssText = 'max-width:90vw;max-height:90vh;box-shadow:0 0 50px rgba(0,0,0,0.5);transform:scale(0.9);transition:transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);border: 2px solid #fff; object-fit: contain;';
+                    overlay.appendChild(zoomImg);
+                    document.body.appendChild(overlay);
+                    overlay.onclick = () => {
+                        overlay.style.opacity = '0';
+                        overlay.querySelector('img').style.transform = 'scale(0.9)';
+                        setTimeout(() => overlay.remove(), 300);
+                    };
+                }
+                const zoomImg = overlay.querySelector('img');
+                zoomImg.src = src;
+                document.body.appendChild(overlay);
+                requestAnimationFrame(() => { overlay.style.opacity = '1'; zoomImg.style.transform = 'scale(1)'; });
+            }
+        });
+        const style = document.createElement('style');
+        style.innerHTML = 'img { cursor: zoom-in; }';
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>

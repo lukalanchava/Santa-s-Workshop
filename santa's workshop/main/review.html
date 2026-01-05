@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Review & Approve - Santa's Workshop</title>
+    <link rel="icon" type="image/png" href="/icons/icon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Mountains+of+Christmas:wght@700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="review.css">
+</head>
+<body>
+    <ul class="lightrope">
+        <li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li>
+        <li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li>
+        <li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li>
+    </ul>
+
+    <header>
+        <div class="logo">
+            <img src="/picture/image.jpg" alt="Santa" class="logo-icon">
+            <h1>Santa's Workshop</h1>
+        </div>
+        <div class="user-profile">
+            <span>Head Elf: Luka Lanchava</span>
+            <img src="/picture/luka.png" alt="Luka" class="avatar" style="object-fit: cover;">
+        </div>
+    </header>
+
+    <nav class="main-nav">
+        <ul>
+            <li><a href="index.html">Dashboard</a></li>
+            <li><a href="wishlist.html">Wishlist</a></li>
+            <li><a href="gifts.html">Gifts</a></li>
+            <li><a href="logistics.html">Logistics</a></li>
+            <li><a href="analytics.html">Analytics</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <div style="background: rgba(0,0,0,0.3); color: #fff; padding: 10px; border-radius: 8px; margin-bottom: 1rem; display: flex; align-items: center; gap: 10px;"><span style="background: var(--christmas-red); padding: 2px 8px; border-radius: 4px; font-size: 0.8rem; font-weight: bold;">NEWS</span><marquee id="newsTicker" scrollamount="5">Loading updates...</marquee></div>
+        <h2>Gift Review Queue <i class="fa-solid fa-magnifying-glass"></i> <span style="display: flex; align-items: center; gap: 10px;"><span id="reviewTimer" style="font-size: 1rem; background: rgba(255,255,255,0.2); padding: 5px 10px; border-radius: 10px;">⏱️ 00:00</span> <span class="queue-count" id="queueCount">Loading...</span></span></h2>
+
+        <!-- Dynamic Review Card -->
+        <div class="review-card" id="review-card">
+            <div class="card-header">
+                <h3 id="child-name">Loading...</h3>
+                <span class="case-id" id="case-id">Case #...</span>
+            </div>
+            <div class="card-body">
+                <div class="child-info">
+                    <h4>Child Profile</h4>
+                    <div class="info-row"><span class="label">Location:</span> <span id="child-location"></span></div>
+                    <div class="info-row"><span class="label">Age:</span> <span id="child-age"></span></div>
+                    <div class="info-row"><span class="label">Naughty Score:</span> <span id="child-score" style="font-weight: bold;"></span></div>
+                    <div class="info-row"><span class="label">Notes:</span> <span id="child-notes"></span></div>
+                    <div class="info-row"><span class="label">Last Year's Gift:</span> <span id="child-history" style="color: #666; font-style: italic;"></span></div>
+                </div>
+                <div class="gift-info">
+                    <img id="child-photo" class="child-photo" alt="Child Photo">
+                    <h4>Gift Request</h4>
+                    <div class="info-row"><span class="label">Item:</span> <span id="gift-item"></span></div>
+                    <div class="info-row"><span class="label">Stock Status:</span> <span id="gift-stock"></span></div>
+                    <div class="info-row"><span class="label">Risk Assessment:</span> <span id="gift-risk" class="risk-badge"></span></div>
+                    <div class="info-row"><span class="label">Elf Recommendation:</span> <span id="elf-rec"></span></div>
+                </div>
+                <div class="letter-section">
+                    <h4><i class="fa-solid fa-file-pen"></i> Letter to Santa</h4>
+                    <div id="child-letter" style="white-space: pre-wrap; color: #4e342e;"></div>
+                </div>
+            </div>
+            <div class="card-actions">
+                <button class="btn btn-escalate" onclick="handleAction('escalated')">Escalate to Santa</button>
+                <button class="btn btn-deny" onclick="handleAction('denied')">Deny Request</button>
+                <button class="btn btn-approve" onclick="handleAction('approved')">Override & Approve</button>
+            </div>
+        </div>
+
+        <div id="empty-state" style="display:none; text-align:center; padding:3rem; color:#666;">
+            <h3>All caught up! <i class="fa-solid fa-cookie-bite"></i></h3>
+            <p>Time for a milk and cookie break.</p>
+            <button class="btn btn-escalate" onclick="window.location.href='wishlist.html'" style="margin-top:1rem; background-color: var(--christmas-green); color: white;">Back to Wishlist</button>
+        </div>
+
+    </main>
+
+    <footer>
+        <p>&copy; <span id="year"></span> Santa's Workshop Inc. | North Pole</p>
+        <p>Made with <i class="fa-solid fa-heart" style="color: var(--christmas-red);"></i> by Luka Lanchava Goa departament</p>
+        <button id="snow-toggle" style="background: none; border: 1px solid #555; color: #888; padding: 5px 10px; border-radius: 15px; cursor: pointer; margin-top: 10px; font-size: 0.8rem;">Toggle Snow</button>
+    </footer>
+
+    <div class="modal-overlay" id="valueModal">
+        <div class="modal">
+            <span class="modal-icon" id="modalIcon"></span>
+            <h3 id="modalTitle"></h3>
+            <p id="modalText"></p>
+            <button class="modal-btn" onclick="closeModal()">Close</button>
+        </div>
+    </div>
+
+    <audio id="bg-music" loop src="/audio/jingle-bells-445113.mp3"></audio>
+
+    <script>
+        document.getElementById('year').innerText = new Date().getFullYear();
+
+        const cases = [
+            {
+                id: "1001",
+                name: "Luka Lanchava",
+                location: "Kutaisi, Georgia",
+                age: 17,
+                image: "/picture/luka.png",
+                score: "0.1% (Amazing)",
+                scoreColor: "#2e7d32",
+                notes: "Wishes for things that often go wrong, but has a good heart.",
+                history: "Lego Set",
+                item: "New PC for Gaming",
+                stock: "In Stock",
+                risk: "Low",
+                riskClass: "risk-med",
+                rec: "Approve",
+                letter: "Dear Santa,\n\nI really want a New PC for Gaming to help me with my studies and games! It needs to have the latest graphics card.\n\nFrom, Luka"
+            },
+            {
+                id: "1024",
+                name: "Irakli Geradze",
+                location: "Samtredia, Georgia",
+                age: "4 months",
+                image: "/picture/irakli.png",
+                score: "x% (Mega High)",
+                scoreColor: "#c62828",
+                notes: "Frequently manipulates other babies. Refused to share cookies.",
+                history: "Flash Costume",
+                item: "AI Robot",
+                stock: "In Stock (5 units left)",
+                risk: "unlimited",
+                riskClass: "risk-high",
+                rec: "Deny (Send Coal)",
+                letter: "Santa,\n\nI want the AI Robot to do homeworks well! I am the best so I deserve it! If you don't bring it, I'll scream!\n\n- Irakli geradze"
+            },
+            {
+                id: "1003",
+                name: "Zurab Shengelia",
+                location: "Samtredia, Georgia",
+                age: 10,
+                image: "/picture/zurab.png",
+                score: "11% (Nice)",
+                scoreColor: "#2e7d32",
+                notes: "Very humble and kind. Shares everything.",
+                history: "Python Book",
+                item: "Game Console",
+                stock: "In Stock",
+                risk: "Low",
+                riskClass: "risk-med",
+                rec: "Approve",
+                letter: "Dear Mr. Claus,\n\nI don't need much, I just need Game Console to play some games after writing much codes.\n\nZurab shengelia"
+            },
+            {
+                id: "1004",
+                name: "Giorgi Kopaleishvili",
+                location: "Samtredia, Georgia",
+                age: 18,
+                image: "/picture/kopaleishvili.png",
+                score: "15% (Nice)",
+                scoreColor: "#2e7d32",
+                notes: "Defended his home from gigant burgers. He is misteryous.",
+                history: "Toy Soldiers",
+                item: "ak-47",
+                stock: "In Stock(none)",
+                risk: "High Safety Risk",
+                riskClass: "risk-high",
+                rec: "deny without questions!",
+                letter: "Dear Santa,\n\nI need a ak-47 to protect my house. I promise I won't shoot my eye out. Also, please bring my family back (just kidding, they're loud).\n\n- Giorgi Kopaleishvili"
+            },
+            {
+                id: "1026",
+                name: "Vato Tabatadze",
+                location: "Tbilisi, Georgia",
+                age: 6,
+                image: "/picture/vato.png",
+                score: "16% (nice)",
+                scoreColor: "#2e7d32",
+                notes: "Caused neighborhood disruption. Slingshot incident.",
+                history: "Slingshot",
+                item: "Laptop",
+                stock: "In Stock",
+                risk: "low",
+                riskClass: "risk-med",
+                rec: "approve",
+                letter: "Hey Santa,\n\nI am Vato and I want laptop because I am in village and I cant do homeworks\n\n- Vato Tabatadze"
+            },
+        ];
+
+        let currentIndex = 0;
+        let timerInterval;
+
+        function loadCase() {
+            if (currentIndex >= cases.length) {
+                document.getElementById('review-card').style.display = 'none';
+                document.getElementById('empty-state').style.display = 'block';
+                document.getElementById('queueCount').innerText = "0 Pending";
+                return;
+            }
+
+            startTimer();
+            const data = cases[currentIndex];
+            document.getElementById('queueCount').innerText = (cases.length - currentIndex) + " Pending";
+            
+            document.getElementById('child-name').innerText = data.name;
+            document.getElementById('case-id').innerText = "Case #" + data.id;
+            document.getElementById('child-location').innerText = data.location;
+            
+            const photoEl = document.getElementById('child-photo');
+            if (data.image) {
+                photoEl.src = data.image;
+                photoEl.style.display = 'block';
+            } else {
+                photoEl.style.display = 'none';
+            }
+
+            document.getElementById('child-age').innerText = data.age;
+            
+            const scoreEl = document.getElementById('child-score');
+            scoreEl.innerText = data.score;
+            scoreEl.style.color = data.scoreColor;
+            
+            document.getElementById('child-notes').innerText = data.notes;
+            document.getElementById('child-history').innerText = data.history || "N/A";
+            document.getElementById('gift-item').innerText = data.item;
+            document.getElementById('gift-stock').innerText = data.stock;
+            
+            const riskEl = document.getElementById('gift-risk');
+            riskEl.innerText = data.risk;
+            riskEl.className = 'risk-badge ' + data.riskClass;
+            
+            document.getElementById('elf-rec').innerText = data.rec;
+            document.getElementById('child-letter').innerText = data.letter;
+            
+            // Reset card style
+            const card = document.getElementById('review-card');
+            card.style.opacity = '1';
+            card.style.transform = 'scale(1)';
+            card.style.borderLeft = 'none';
+        }
+
+        function handleAction(action) {
+            const card = document.getElementById('review-card');
+            
+            // Visual feedback
+            if (action === 'approved') {
+                card.style.borderLeft = "10px solid #165B33";
+                triggerConfetti();
+            } else if (action === 'denied') {
+                card.style.borderLeft = "10px solid #D42426";
+            } else {
+                card.style.borderLeft = "10px solid #F8B229";
+            }
+
+            // Animate removal
+            card.style.opacity = '0.5';
+            card.style.transform = 'scale(0.98)';
+            
+            setTimeout(() => {
+                currentIndex++;
+                loadCase();
+            }, 400);
+        }
+
+        function startTimer() {
+            clearInterval(timerInterval);
+            let seconds = 0;
+            const timerEl = document.getElementById('reviewTimer');
+            timerInterval = setInterval(() => {
+                seconds++;
+                const mins = Math.floor(seconds / 60).toString().padStart(2, '0');
+                const secs = (seconds % 60).toString().padStart(2, '0');
+                timerEl.innerText = `⏱️ ${mins}:${secs}`;
+            }, 1000);
+        }
+
+        function triggerConfetti() {
+            const colors = ['#c62828', '#2e7d32', '#ffca28', '#ffffff'];
+            for(let i=0; i<50; i++) {
+                const conf = document.createElement('div');
+                conf.style.position = 'fixed';
+                conf.style.left = Math.random() * 100 + 'vw';
+                conf.style.top = '-10px';
+                conf.style.width = '10px';
+                conf.style.height = '10px';
+                conf.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                conf.style.zIndex = '9999';
+                conf.style.transition = 'top 2s ease-in, transform 2s linear';
+                document.body.appendChild(conf);
+                
+                setTimeout(() => {
+                    conf.style.top = '100vh';
+                    conf.style.transform = `rotate(${Math.random() * 360}deg)`;
+                }, 10);
+                setTimeout(() => conf.remove(), 2000);
+            }
+        }
+
+        // Initialize
+        const urlParams = new URLSearchParams(window.location.search);
+        const caseId = urlParams.get('id');
+        if (caseId) {
+            const foundIndex = cases.findIndex(c => c.id === caseId);
+            if (foundIndex !== -1) {
+                currentIndex = foundIndex;
+            }
+        }
+        loadCase();
+
+        // Keyboard Shortcuts
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'a' || e.key === 'A') handleAction('approved');
+            if (e.key === 'd' || e.key === 'D') handleAction('denied');
+            if (e.key === 'e' || e.key === 'E') handleAction('escalated');
+        });
+
+        // Realistic Snow
+        let snowInterval;
+        let snowEnabled = true;
+
+        function createSnow() {
+            if (!snowEnabled) return;
+            const snowflake = document.createElement('div');
+            snowflake.classList.add('snowflake');
+            snowflake.innerHTML = '❄';
+            snowflake.style.left = Math.random() * 100 + 'vw';
+            snowflake.style.fontSize = Math.random() * 15 + 10 + 'px';
+            snowflake.style.animationDuration = Math.random() * 5 + 3 + 's';
+            snowflake.style.opacity = Math.random();
+            document.body.appendChild(snowflake);
+            setTimeout(() => snowflake.remove(), 8000);
+        }
+        snowInterval = setInterval(createSnow, 200);
+
+        document.getElementById('snow-toggle').addEventListener('click', function() {
+            snowEnabled = !snowEnabled;
+            this.innerText = snowEnabled ? "Disable Snow" : "Enable Snow";
+            if(!snowEnabled) {
+                document.querySelectorAll('.snowflake').forEach(el => el.remove());
+            }
+        });
+
+        // Custom Modal Override
+        window.alert = function(msg) {
+            document.getElementById('modalTitle').innerText = "Notification";
+            document.getElementById('modalText').innerText = msg;
+            document.getElementById('modalIcon').innerHTML = '<i class="fa-solid fa-bell" style="color: var(--gold);"></i>';
+            document.getElementById('valueModal').classList.add('active');
+        }
+        function closeModal() {
+            document.getElementById('valueModal').classList.remove('active');
+        }
+        
+        const musicBtn = document.getElementById('music-toggle'); 
+        const bgMusic = document.getElementById('bg-music'); 
+        
+        if (sessionStorage.getItem('musicPlaying') === 'true') {
+            bgMusic.currentTime = parseFloat(sessionStorage.getItem('musicTime') || 0);
+            bgMusic.play().catch(e => console.log("Autoplay blocked:", e));
+        }
+
+        // Music toggle removed from this page
+
+        window.addEventListener('beforeunload', () => {
+            sessionStorage.setItem('musicTime', bgMusic.currentTime);
+        });
+
+        const newsItems = ["Breaking: Elf Union reaches agreement on cookie breaks...", "Weather Alert: Heavy snow expected in sector 7...", "Toy Production: Wooden trains ahead of schedule...", "Mrs. Claus announces new hot cocoa recipe...", "Reindeer Games: Dasher takes gold in sprint..."]; setInterval(() => { const ticker = document.getElementById('newsTicker'); if(ticker) ticker.innerText = newsItems.join("  ***  "); }, 10000); setTimeout(() => { const ticker = document.getElementById('newsTicker'); if(ticker) ticker.innerText = newsItems.join("  ***  "); }, 100);
+    
+        // Global Image Zoom
+        document.addEventListener('click', function(e) {
+            if (e.target.tagName === 'IMG') {
+                e.preventDefault();
+                e.stopPropagation();
+                const src = e.target.src;
+                let overlay = document.getElementById('globalZoomOverlay');
+                if (!overlay) {
+                    overlay = document.createElement('div');
+                    overlay.id = 'globalZoomOverlay';
+                    overlay.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.9);z-index:9999999;display:flex;justify-content:center;align-items:center;cursor:zoom-out;opacity:0;transition:opacity 0.3s ease;backdrop-filter:blur(5px);';
+                    const zoomImg = document.createElement('img');
+                    zoomImg.style.cssText = 'max-width:90vw;max-height:90vh;box-shadow:0 0 50px rgba(0,0,0,0.5);transform:scale(0.9);transition:transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);border: 2px solid #fff; object-fit: contain;';
+                    overlay.appendChild(zoomImg);
+                    document.body.appendChild(overlay);
+                    overlay.onclick = () => {
+                        overlay.style.opacity = '0';
+                        overlay.querySelector('img').style.transform = 'scale(0.9)';
+                        setTimeout(() => overlay.remove(), 300);
+                    };
+                }
+                const zoomImg = overlay.querySelector('img');
+                zoomImg.src = src;
+                document.body.appendChild(overlay);
+                requestAnimationFrame(() => { overlay.style.opacity = '1'; zoomImg.style.transform = 'scale(1)'; });
+            }
+        });
+        const style = document.createElement('style');
+        style.innerHTML = 'img { cursor: zoom-in; }';
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
